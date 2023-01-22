@@ -10,3 +10,10 @@ services:
       - '5432:5432'
     volumes: 
       - ./initial_tables_auth.sql:/docker-entrypoint-initdb.d/initial_tables_auth.sql
+    
+  auth-api:
+    build: '.'
+    ports:
+      - '5000:5000'
+    depends_on:
+      - auth-db
