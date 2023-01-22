@@ -18,6 +18,6 @@ class UserService(object):
             user = self.storage.get_user_by_username(domain_object.username)
             return user
         except UserError as e:
-            return {'message': e.message, 'code': ErrorCodes.USER_ERROR}
+            return {'message': e, 'code': ErrorCodes.USER_ERROR}
         except Exception as e:
-            return {'message': e.message, 'code': ErrorCodes.UNDEFINED_ERROR}
+            return {'message': e, 'code': ErrorCodes.UNDEFINED_ERROR}
