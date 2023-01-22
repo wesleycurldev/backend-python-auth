@@ -62,3 +62,6 @@ def cashback():
 
     # bookings = manager.get_bookings(user_dto)
     return "teste"
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)

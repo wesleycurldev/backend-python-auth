@@ -1,7 +1,7 @@
 from auth_service.application.user.user_dto import UserDto
 
 from auth_service.domain.user.exceptions import UserError
-from auth_service.domain.user.enums import ErrorCodes, SuccessCodes
+from auth_service.domain.user.enums import ErrorCodes
 from .user_storage import UserStorage
 
 
