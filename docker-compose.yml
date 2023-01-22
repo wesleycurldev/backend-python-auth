@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  auth-db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=maistodos_auth
+      - POSTGRES_PASSWORD=MaisTodos2023!
+    ports:
+      - '5432:5432'
+    volumes: 
+      - ./initial_tables_auth.sql:/docker-entrypoint-initdb.d/initial_tables_auth.sql
