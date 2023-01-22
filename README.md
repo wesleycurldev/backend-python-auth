@@ -63,14 +63,18 @@ Para desenvolver os testes foi usado o `unittest` e para executar os mesmos bast
 ```sh
 python -m unittest
 ```
-
+Para verificar a cobertura de testes basta rodar os seguintes comandos:
+```sh
+python -m coverage run -m unittest
+python -m coverage report
+```
 ##### Motivação:
 * Simplicidade.
 * Nativo do python
 
 ### Instalação
 Na Raiz do projeto existe um arquivo `docker-compose.yaml`, este contém todos os recursos necessários para rodar localmente a aplicação, incluindo um script sql para criação das tabelas e inserção dos dados iniciais necessários para o desenvolvimento do projeto.
-Obs: `certifique-se de ter o docker e o docker-compose instalado`
+Obs: `certifique-se de ter o docker e o docker-compose instalado`.
 Na raiz do projeto digite o seguinte comando:
 ```sh
 docker-compose up -d
