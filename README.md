@@ -13,12 +13,16 @@ Motivação: Em um cenário competitivo onde a mudança é cada vez maior, softw
 Toda a estrutura do projeto foi desenvolvida visando garantir separar tecnologias externas como por exemplo frameworks, banco de dados etc. das camadas de application e domínio onde estão as regras de negócio, validações, entidades, exceptions e etc. Consequentemente isso traz o benefício de conseguirmos alterar camadas mais externas ao domínio e application com mínimo de empenho.
 ```
 backend-python-auth
+├─ .env
+├─ .gitignore
+├─ Dockerfile
 ├─ README.md
 ├─ auth_service
 │  ├─ application
 │  │  └─ user
 │  │     ├─ user_dto.py
-│  │     └─ user_services.py
+│  │     ├─ user_services.py
+│  │     └─ user_storage.py
 │  ├─ domain
 │  │  └─ user
 │  │     ├─ entities.py
@@ -31,17 +35,17 @@ backend-python-auth
 ├─ backend-python-auth.png
 ├─ docker-compose.yml
 ├─ infrastructure
-│  └─ wallet
-│     ├─ .env
-│     ├─ api
-│     │  ├─ api.py
-│     │  ├─ models
-│     │  │  ├─ db.py
-│     │  │  └─ users.py
-│     │  └─ repositories
-│     │     └─ users.py
-│     └─ requirements.txt
-└─ initial_tables_auth.sql
+│  └─ api
+│     ├─ api.py
+│     ├─ models
+│     │  ├─ db.py
+│     │  └─ users.py
+│     ├─ repositories
+│     │  └─ users.py
+│     └─ wraps
+│        └─ token.py
+├─ initial_tables_auth.sql
+└─ requirements.txt
 ```
 ### Camadas Externas (tecnologias)
 #### Banco de dados: `PostgreSQL`
@@ -52,7 +56,7 @@ backend-python-auth
 #### Framework: `Flask`
 ##### Motivação:
 * Simplicidade.
-* Facilidade de aplicar os conceitos do Clean Architecture e alguns Design Patterns.
+* Baixo acoplamento e facilidade de aplicar alguns Design Patterns.
 * Agilidade no desenvolvimento da aplicação.
 
 ### Camadas Internas (Regras de negócio, validação, testes etc)
@@ -80,4 +84,3 @@ Na raiz do projeto digite o seguinte comando:
 docker-compose up -d
 ```
 `IMPORTANTE: Em um cenário real eu não subiria o arquivo .env no git, só subi para facilitar a vida de quem vai testar este software e os dados nele contido são fictícios, em um ambiente produtivo eu usaria o secretManager da aws para armazenar os dados sensíveis.`
-
