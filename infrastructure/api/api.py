@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 
 from models.db import db
 from repositories.users import UserRepository, UserService, UserDto
+from external_requests.cashback_processing import cashback_processing
 
 from wraps.token import token_required
 
@@ -60,12 +61,11 @@ def login():
 @app.route('/api/cashback', methods=['POST'])
 @token_required
 def cashback():
-    # repository = BookingRepository()
-    # manager = BookingManager(repository)
-    # user_dto = UserDto(session['current_user']['user'], session['current_user']['is_admin'])
+    request_body = request.get_json()
+    
+    cashback_processing_response = cashback_processing(request_body=request_body)
 
-    # bookings = manager.get_bookings(user_dto)
-    return "teste"
+    return cashback_processing_response
 
 
 if __name__ == '__main__':
