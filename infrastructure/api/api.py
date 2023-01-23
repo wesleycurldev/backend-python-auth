@@ -14,10 +14,13 @@ from wraps.token import token_required
 
 from dotenv import load_dotenv
 from os import environ
+from flasgger import Swagger
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__) 
+
+Swagger(app)
 CORS(app)
 
 app.config['SECRET_KEY'] = environ.get("SECRET_KEY")
@@ -30,6 +33,29 @@ app.app_context().push()
 
 @app.route('/login', methods=['POST'])
 def login():
+    """Endpoint for authentication.
+    ---
+    tags:
+      - auth
+    parameters:
+      - name: username
+        in: path
+        type: string
+        required: true
+      - name: password
+        in: path
+        type: string
+        required: true
+    responses:
+      200:
+        description: token to access other resources
+        schema:
+          id: login
+          type: object
+          properties:
+            token:
+              type: string
+    """
     auth = request.get_json()
     
     if auth and 'username' in auth and 'password' in auth:
@@ -61,6 +87,42 @@ def login():
 @app.route('/api/cashback', methods=['POST'])
 @token_required
 def cashback():
+    """Endpoint to call cashback processing api.
+    ---
+    tags:
+      - cashback
+    parameters:
+      - name: sold_at
+        in: path
+        type: datetime
+        required: true
+      - name: customer
+        in: path
+        type: dict
+        required: true
+      - name: total
+        in: path
+        type: float
+        required: true
+      - name: products
+        in: path
+        type: list
+        required: true
+    responses:
+      200:
+        description: cashback processing response
+        schema:
+          id: Cashback
+          type: object
+          properties:
+            code:
+              type: string
+            error:
+              type: boolean
+              default: False
+            message:
+              type: string
+    """
     request_body = request.get_json()
     
     cashback_processing_response = cashback_processing(request_body=request_body)
