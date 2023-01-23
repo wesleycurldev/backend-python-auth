@@ -16,7 +16,7 @@ def token_required(f):
             try:
                 data = decode(token, environ.get("SECRET_KEY"), algorithms=["HS256"])
                 session['current_user'] = {'user': data['user']}
-            except ExpiredSignatureError as e:
+            except ExpiredSignatureError:
                 return make_response('Signature has expired', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
             except Exception:
                 return make_response('Invalid token', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
