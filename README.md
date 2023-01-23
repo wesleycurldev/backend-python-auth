@@ -77,6 +77,14 @@ python -m coverage report
 * Nativo do python
 
 ### Instalação
+Modo 1(Ambiente virtual):
+Criar um ambiente virtual e executar a api direto
+```sh
+python -m venv venv
+cd infrastructure/api/
+python api.py
+```
+Modo 2(Docker):
 Na Raiz do projeto existe um arquivo `docker-compose.yaml`, este contém todos os recursos necessários para rodar localmente a aplicação, incluindo um script sql para criação das tabelas e inserção dos dados iniciais necessários para o desenvolvimento do projeto.
 Obs: `certifique-se de ter o docker e o docker-compose instalado`.
 Na raiz do projeto digite o seguinte comando:
@@ -84,3 +92,10 @@ Na raiz do projeto digite o seguinte comando:
 docker-compose up -d
 ```
 `IMPORTANTE: Em um cenário real eu não subiria o arquivo .env no git, só subi para facilitar a vida de quem vai testar este software e os dados nele contido são fictícios, em um ambiente produtivo eu usaria o secretManager da aws para armazenar os dados sensíveis.`
+
+### Documentação (Swagger)
+Para acessar a documentação basta mudar a porta para 5000 (Obs: se não for a 5000 por algum motivo que não tive tempo de investigar não funciona) e
+acessar a seguinte url:
+```sh
+http://127.0.0.1:5000/apidocs
+```
